@@ -15,13 +15,13 @@ To get started, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/arshali2774/Task_Manager_DND_VOOSH.git
+git clone https://github.com/arshali2774/Task_Manager_DND_VOOSH_backend.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd Task_Manager_DND_VOOSH
+cd Task_Manager_DND_VOOSH_backend
 ```
 
 3. Install the dependencies:
