@@ -7,6 +7,7 @@ const {
 } = require('../validations/auth.validation');
 const passport = require('passport');
 const generateToken = require('../utils/generateToken');
+const { protect } = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.post('/login', validate(loginSchema), login);
 // logout route
 router.post('/logout', logout);
 // get user data route
-router.get('/user', (req, res) => {
+router.get('/user', protect, (req, res) => {
   if (!req.user) {
     return res.status(401).json({ message: 'Not authenticated' });
   }
