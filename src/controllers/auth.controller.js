@@ -24,7 +24,8 @@ const register = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      sameSite: 'None', // Allow cross-site requests
+      maxAge: 30 * 24 * 60 * 60 * 1000,
     });
     // Return a success message and the user data
     res.status(201).json({
@@ -89,6 +90,7 @@ const login = async (req, res) => {
 const logout = (req, res) => {
   res.cookie('token', '', {
     httpOnly: true,
+    sameSite: 'None', // Allow cross-site requests
     expires: new Date(0),
   });
   res.status(200).json({

@@ -38,11 +38,17 @@ router.get(
     const token = generateToken(req.user._id);
     res.cookie('token', token, {
       httpOnly: true,
+      sameSite: 'None', // Allow cross-site requests
       secure: process.env.NODE_ENV === 'production',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     });
 
-    res.redirect('http://localhost:5173/tasks'); // Redirect to the tasks
+    // Redirect based on environment
+    if (process.env.NODE_ENV === 'production') {
+      res.redirect('https://task-manager-voosh-project.netlify.app/tasks');
+    } else {
+      res.redirect('http://localhost:5173/tasks');
+    }
   }
 );
 
