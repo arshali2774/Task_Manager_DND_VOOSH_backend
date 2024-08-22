@@ -12,14 +12,24 @@ const session = require('express-session');
 
 dotenv.config();
 connectDB();
+const allowedOrigins = [
+  'https://task-manager-voosh-project.netlify.app', // Production frontend URL
+  'http://localhost:5173', // Local development URL
+];
 // import google auth
 require('./src/config/googleAuth');
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
+    origin: function (origin, callback) {
+      // Allow requests with no origin (mobile apps, Postman)
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true, // Allow credentials (cookies, authorization headers)
   })
 );
 app.use(cookieParser());
