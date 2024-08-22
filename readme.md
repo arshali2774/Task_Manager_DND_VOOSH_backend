@@ -30,13 +30,25 @@ cd Task_Manager_DND_VOOSH_backend
 npm install
 ```
 
-4. Start the development server:
+4. Set up the environment variables. Create a `.env` file in the root directory with the following content:
+
+   **`.env`**
+
+   ```env
+   MONGODB_URI=YOUR-MONGO-URI
+   JWT_SECRET=secret
+   GOOGLE_CLIENT_ID=FROM GOOGLE OAUTH CREDENTIALS
+   GOOGLE_CLIENT_SECRET=FROM GOOGLE OAUTH CREDENTIALS
+   NODE_ENV=development
+   ```
+
+5. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-5. Open postman and make a request to the server using following routes:
+6. Open postman and make a request to the server using following routes:
 
 ```js
 Base URL: http://localhost:3000
