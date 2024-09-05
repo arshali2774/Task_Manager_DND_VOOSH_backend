@@ -16,7 +16,7 @@ router.post('/register', validate(registerSchema), register);
 // login route
 router.post('/login', validate(loginSchema), login);
 // logout route
-router.post('/logout', logout);
+router.get('/logout', logout);
 // get user data route
 router.get('/user', protect, (req, res) => {
   if (!req.user) {
@@ -35,11 +35,11 @@ router.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     // Successful authentication, redirect home.
-
+    console.log(req.user);
     const token = generateToken(req.user._id);
     res.cookie('token', token, {
       httpOnly: true,
-      sameSite: 'None', // Allow cross-site requests
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
       secure: process.env.NODE_ENV === 'production',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     });

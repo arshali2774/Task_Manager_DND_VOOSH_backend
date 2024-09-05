@@ -5,7 +5,6 @@ const registerSchema = Joi.object({
   lastName: Joi.string().min(2).max(30).required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
-  confirmPassword: Joi.string().min(6).required(),
 });
 // validation schema for login route
 const loginSchema = Joi.object({

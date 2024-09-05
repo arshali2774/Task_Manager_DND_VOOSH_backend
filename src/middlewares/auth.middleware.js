@@ -13,6 +13,7 @@ const protect = async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log(decoded.id);
       req.user = await User.findById(decoded.id).select('-password');
       // If no user found, return unauthorized response
       if (!req.user) {
